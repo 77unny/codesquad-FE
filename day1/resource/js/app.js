@@ -16,8 +16,9 @@ const item = document.querySelector(ELEMENTS.item);
 const itemWidth = document.querySelector(ELEMENTS.item).offsetWidth;
 const itemLength = document.querySelectorAll(ELEMENTS.item).length;
 const itemMove = itemWidth + OPTION.margin;
-
 wrap.style.position = 'relative';
+wrap.style.width = itemMove * itemLength + 'px';
+wrap.style.transition = OPTION.speed + 'ms';
 
 const nextIndex = () => {
     if (OPTION.curruntIndex === itemLength - 1)
@@ -34,12 +35,14 @@ const prevIndex = () => {
 const prev = () => {
     prevIndex();
     console.log(OPTION.curruntIndex);
-    wrap.style.left = -(itemMove * OPTION.curruntIndex) + 'px';
+    wrap.style.transform =
+        'translate3d(-' + itemMove * OPTION.curruntIndex + 'px, 0px, 0px';
 };
 const next = () => {
     nextIndex();
     console.log(OPTION.curruntIndex);
-    wrap.style.left = -(itemMove * OPTION.curruntIndex) + 'px';
+    wrap.style.transform =
+        'translate3d(-' + itemMove * OPTION.curruntIndex + 'px, 0px, 0px';
 };
 document.querySelector(ELEMENTS.prev).addEventListener('click', prev);
 document.querySelector(ELEMENTS.next).addEventListener('click', next);
