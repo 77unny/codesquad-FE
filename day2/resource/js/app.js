@@ -21,7 +21,8 @@ class Slider {
         this.wrapEl.style.width = this.itemEl.offsetWidth * this.VIEW + 'px';
         this.contentsEl.style.position = 'relative';
         this.contentsEl.style.width =
-            this.itemEl.offsetWidth * (this.itemsEl.length + this.VIEW * CLONE_NUMBER) +
+            this.itemEl.offsetWidth *
+                (this.itemsEl.length + this.VIEW * CLONE_NUMBER) +
             'px';
         this.contentsEl.style.transform =
             'translateX(' + -this.itemEl.offsetWidth * this.VIEW + 'px)';
@@ -43,58 +44,60 @@ class Slider {
                 .classList.add('cloned');
         }
     }
-    onMove(){
-        this.contentsEl.style.transform = `translateX(-${this.itemEl.offsetWidth * this.CURRUNT_INDEX}px)`;
+    onMove() {
+        this.contentsEl.style.transform = `translateX(-${this.itemEl
+            .offsetWidth * this.CURRUNT_INDEX}px)`;
     }
     onNextClick() {
-        if (this.CURRUNT_INDEX === this.itemsEl.length + this.VIEW) return;
-        this.contentsEl.addEventListener('transitionend', () => {
-            if (this.CURRUNT_INDEX === this.itemsEl.length + this.VIEW) {
-                this.contentsEl.style.transition = 'none';
-                this.CURRUNT_INDEX = this.VIEW;
-                this.onMove();
-            }
+        this.nextEl.addEventListener('click', () => {
+            if (this.CURRUNT_INDEX === this.itemsEl.length + this.VIEW) return;
+            this.contentsEl.addEventListener('transitionend', () => {
+                if (this.CURRUNT_INDEX === this.itemsEl.length + this.VIEW) {
+                    this.contentsEl.style.transition = 'none';
+                    this.CURRUNT_INDEX = this.VIEW;
+                    this.onMove();
+                }
+            });
+            this.contentsEl.style.transition = this.SPEED + 'ms';
+            this.CURRUNT_INDEX++;
+            this.onMove();
         });
-        this.contentsEl.style.transition = this.SPEED + 'ms';
-        this.CURRUNT_INDEX++;
-        this.onMove();
     }
     onPrevClick() {
-        if (this.CURRUNT_INDEX === this.INIT_INDEX) return;
-        this.contentsEl.addEventListener('transitionend', () => {
-            if (this.CURRUNT_INDEX === this.INIT_INDEX) {
-                this.contentsEl.style.transition = 'none';
-                this.CURRUNT_INDEX = this.itemsEl.length;
-                this.onMove();
-            }
+        this.prevEl.addEventListener('click', () => {
+            if (this.CURRUNT_INDEX === this.INIT_INDEX) return;
+            this.contentsEl.addEventListener('transitionend', () => {
+                if (this.CURRUNT_INDEX === this.INIT_INDEX) {
+                    this.contentsEl.style.transition = 'none';
+                    this.CURRUNT_INDEX = this.itemsEl.length;
+                    this.onMove();
+                }
+            });
+            this.contentsEl.style.transition = this.SPEED + 'ms';
+            this.CURRUNT_INDEX--;
+            this.onMove();
         });
-        this.contentsEl.style.transition = this.SPEED + 'ms';
-        this.CURRUNT_INDEX--;
-        this.onMove();
     }
     onNavClick() {
         const INIT_ADD_NUMBER = 1;
         for (const iterator of this.navLiEl) {
             iterator.addEventListener('click', () => {
-                this.CURRUNT_INDEX = parseInt(iterator.dataset.item) + INIT_ADD_NUMBER;
+                this.CURRUNT_INDEX =
+                    parseInt(iterator.dataset.item) + INIT_ADD_NUMBER;
                 this.contentsEl.style.transition = this.SPEED + 'ms';
                 this.onMove();
             });
         }
     }
     onNavIndex() {
-        console.log('NAV INDEX => ',this.CURRUNT_INDEX)
+        console.log('NAV INDEX => ', this.CURRUNT_INDEX);
     }
     run() {
         this.initStyle();
         this.cloneEl();
         this.onNavClick();
-        this.nextEl.addEventListener('click', () => {
-            this.onNextClick();
-        });
-        this.prevEl.addEventListener('click', () => {
-            this.onPrevClick();
-        });
+        this.onNextClick();
+        this.onPrevClick();
     }
 }
 
