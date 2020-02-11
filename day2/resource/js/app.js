@@ -15,12 +15,13 @@ class Slider {
         this.run();
     }
     initStyle() {
+        const CLONE_NUMBER = 2;
         this.wrapEl.style.overflow = 'hidden';
         this.wrapEl.style.position = 'relative';
         this.wrapEl.style.width = this.itemEl.offsetWidth * this.VIEW + 'px';
         this.contentsEl.style.position = 'relative';
         this.contentsEl.style.width =
-            this.itemEl.offsetWidth * (this.itemsEl.length + this.VIEW * 2) +
+            this.itemEl.offsetWidth * (this.itemsEl.length + this.VIEW * CLONE_NUMBER) +
             'px';
         this.contentsEl.style.transform =
             'translateX(' + -this.itemEl.offsetWidth * this.VIEW + 'px)';
@@ -72,9 +73,10 @@ class Slider {
         this.onMove();
     }
     onNavClick() {
+        const INIT_ADD_NUMBER = 1;
         for (const iterator of this.navLiEl) {
             iterator.addEventListener('click', () => {
-                this.CURRUNT_INDEX = parseInt(iterator.dataset.item) + 1;
+                this.CURRUNT_INDEX = parseInt(iterator.dataset.item) + INIT_ADD_NUMBER;
                 this.contentsEl.style.transition = this.SPEED + 'ms';
                 this.onMove();
             });
@@ -84,7 +86,6 @@ class Slider {
         console.log('NAV INDEX => ',this.CURRUNT_INDEX)
     }
     run() {
-        console.log('------ 실행');
         this.initStyle();
         this.cloneEl();
         this.onNavClick();
@@ -105,6 +106,6 @@ const slider = new Slider({
     itemEl: '.card-item',
     prevEl: '.btn-prev',
     nextEl: '.btn-next',
-    speed: 200,
+    speed: 500,
     view: 1
 });
