@@ -42,24 +42,21 @@ class Slider {
                 .classList.add('cloned');
         }
     }
+    onMove(){
+        this.contentsEl.style.transform = `translateX(-${this.itemEl.offsetWidth * this.CURRUNT_INDEX}px)`;
+    }
     onNextClick() {
         if (this.CURRUNT_INDEX === this.itemsEl.length + this.VIEW) return;
         this.contentsEl.addEventListener('transitionend', () => {
             if (this.CURRUNT_INDEX === this.itemsEl.length + this.VIEW) {
                 this.contentsEl.style.transition = 'none';
                 this.CURRUNT_INDEX = this.VIEW;
-                this.contentsEl.style.transform =
-                    'translateX(' +
-                    -this.itemEl.offsetWidth * this.CURRUNT_INDEX +
-                    'px)';
+                this.onMove();
             }
         });
         this.contentsEl.style.transition = this.SPEED + 'ms';
         this.CURRUNT_INDEX++;
-        this.contentsEl.style.transform =
-            'translateX(' +
-            -this.itemEl.offsetWidth * this.CURRUNT_INDEX +
-            'px)';
+        this.onMove();
     }
     onPrevClick() {
         if (this.CURRUNT_INDEX === 0) return;
@@ -67,30 +64,24 @@ class Slider {
             if (this.CURRUNT_INDEX === 0) {
                 this.contentsEl.style.transition = 'none';
                 this.CURRUNT_INDEX = this.itemsEl.length;
-                this.contentsEl.style.transform =
-                    'translateX(' +
-                    -this.itemEl.offsetWidth * this.CURRUNT_INDEX +
-                    'px)';
+                this.onMove();
             }
         });
         this.contentsEl.style.transition = this.SPEED + 'ms';
         this.CURRUNT_INDEX--;
-        this.contentsEl.style.transform =
-            'translateX(' +
-            -this.itemEl.offsetWidth * this.CURRUNT_INDEX +
-            'px)';
+        this.onMove();
     }
     onNavClick() {
         for (const iterator of this.navLiEl) {
             iterator.addEventListener('click', () => {
                 this.CURRUNT_INDEX = parseInt(iterator.dataset.item) + 1;
                 this.contentsEl.style.transition = this.SPEED + 'ms';
-                this.contentsEl.style.transform =
-                    'translateX(' +
-                    -this.itemEl.offsetWidth * this.CURRUNT_INDEX +
-                    'px)';
+                this.onMove();
             });
         }
+    }
+    onNavIndex() {
+        console.log('NAV INDEX => ',this.CURRUNT_INDEX)
     }
     run() {
         console.log('------ 실행');
@@ -117,18 +108,3 @@ const slider = new Slider({
     speed: 200,
     view: 1
 });
-
-// const foo = () => {
-//     const a = slider.navEl.querySelectorAll('li');
-//     for (const iterator of a) {
-//         iterator.addEventListener('click', () => {
-//             slider.CURRUNT_INDEX = parseInt(iterator.dataset.item) + 1;
-//             slider.contentsEl.style.transition = slider.SPEED + 'ms';
-//             slider.contentsEl.style.transform =
-//                 'translateX(' +
-//                 -slider.itemEl.offsetWidth * slider.CURRUNT_INDEX +
-//                 'px)';
-//         });
-//     }
-// };
-// foo();
