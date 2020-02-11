@@ -1,0 +1,22 @@
+@import 'reset';
+@import 'var';
+
+.card { 
+    .card-nav { 
+
+    }
+    .card-contents {
+        font-size:0;
+        .card-item {
+            display:inline-block;
+            width: 400px;
+            font-size:0;
+            > div {
+                display:inline-block;
+                width:50%;
+                font-size:14px;
+                vertical-align: top;
+            }
+        }
+    }
+}
