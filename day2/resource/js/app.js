@@ -60,9 +60,9 @@ class Slider {
         this.onMove();
     }
     onPrevClick() {
-        if (this.CURRUNT_INDEX === 0) return;
+        if (this.CURRUNT_INDEX === this.INIT_INDEX) return;
         this.contentsEl.addEventListener('transitionend', () => {
-            if (this.CURRUNT_INDEX === 0) {
+            if (this.CURRUNT_INDEX === this.INIT_INDEX) {
                 this.contentsEl.style.transition = 'none';
                 this.CURRUNT_INDEX = this.itemsEl.length;
                 this.onMove();
