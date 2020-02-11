@@ -16,7 +16,7 @@ class Slider {
     initStyle() {
         this.wrapEl.style.overflow = 'hidden';
         this.wrapEl.style.position = 'relative';
-        this.wrapEl.style.width = this.itemEl.offsetWidth + 'px';
+        this.wrapEl.style.width = this.itemEl.offsetWidth * this.VIEW + 'px';
         this.contentsEl.style.position = 'relative';
         this.contentsEl.style.width =
             this.itemEl.offsetWidth * (this.itemsEl.length + this.VIEW * 2) +
@@ -38,9 +38,9 @@ class Slider {
         }
     }
     onNextClick() {
-        if (this.CURRUNT_INDEX === this.itemsEl.length + 1) return;
+        if (this.CURRUNT_INDEX === this.itemsEl.length + this.VIEW) return;
         this.contentsEl.addEventListener('transitionend', () => {
-            if (this.CURRUNT_INDEX === this.itemsEl.length + 1) {
+            if (this.CURRUNT_INDEX === this.itemsEl.length + this.VIEW) {
                 this.contentsEl.style.transition = 'none';
                 this.CURRUNT_INDEX = this.VIEW;
                 this.contentsEl.style.transform =
@@ -96,6 +96,6 @@ const slider = new Slider({
     itemEl: '.card-item',
     prevEl: '.btn-prev',
     nextEl: '.btn-next',
-    speed: 500,
-    view: 1
+    speed: 200,
+    view: 2
 });
