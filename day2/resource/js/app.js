@@ -6,6 +6,7 @@ class Slider {
             (this.VIEW = option.view);
         this.wrapEl = document.querySelector(option.wrapEl);
         this.navEl = document.querySelector(option.navEl);
+        this.navLiEl = this.navEl.querySelectorAll('li');
         this.contentsEl = document.querySelector(option.contentsEl);
         this.itemsEl = document.querySelectorAll(option.itemsEl);
         this.itemEl = document.querySelector(option.itemEl);
@@ -23,6 +24,10 @@ class Slider {
             'px';
         this.contentsEl.style.transform =
             'translateX(' + -this.itemEl.offsetWidth * this.VIEW + 'px)';
+
+        for (let i = 0; i < this.navLiEl.length; i++) {
+            this.navLiEl[i].dataset.item = [i];
+        }
     }
     cloneEl() {
         const count = this.VIEW;
@@ -75,10 +80,23 @@ class Slider {
             -this.itemEl.offsetWidth * this.CURRUNT_INDEX +
             'px)';
     }
+    onNavClick() {
+        for (const iterator of this.navLiEl) {
+            iterator.addEventListener('click', () => {
+                this.CURRUNT_INDEX = parseInt(iterator.dataset.item) + 1;
+                this.contentsEl.style.transition = this.SPEED + 'ms';
+                this.contentsEl.style.transform =
+                    'translateX(' +
+                    -this.itemEl.offsetWidth * this.CURRUNT_INDEX +
+                    'px)';
+            });
+        }
+    }
     run() {
         console.log('------ 실행');
         this.initStyle();
         this.cloneEl();
+        this.onNavClick();
         this.nextEl.addEventListener('click', () => {
             this.onNextClick();
         });
@@ -97,5 +115,20 @@ const slider = new Slider({
     prevEl: '.btn-prev',
     nextEl: '.btn-next',
     speed: 200,
-    view: 2
+    view: 1
 });
+
+// const foo = () => {
+//     const a = slider.navEl.querySelectorAll('li');
+//     for (const iterator of a) {
+//         iterator.addEventListener('click', () => {
+//             slider.CURRUNT_INDEX = parseInt(iterator.dataset.item) + 1;
+//             slider.contentsEl.style.transition = slider.SPEED + 'ms';
+//             slider.contentsEl.style.transform =
+//                 'translateX(' +
+//                 -slider.itemEl.offsetWidth * slider.CURRUNT_INDEX +
+//                 'px)';
+//         });
+//     }
+// };
+// foo();

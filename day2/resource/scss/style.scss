@@ -3,7 +3,18 @@
 
 .card { 
     .card-nav { 
-
+        ul {
+            font-size: 0;
+        }
+        li { 
+            display: inline-block;
+            width:25%;
+            font-size: $font-size-default;
+            text-align: center;
+            &.on {
+                font-weight: bold;
+            }
+        }
     }
     .card-contents {
         font-size:0;
@@ -16,6 +27,13 @@
                 width:50%;
                 font-size:14px;
                 vertical-align: top;
+            }
+            .card-img { 
+                text-align: center;
+                img { 
+                    width: 50%;
+                    border-radius: 50%;
+                }
             }
         }
     }
