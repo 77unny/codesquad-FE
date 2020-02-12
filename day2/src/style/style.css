@@ -181,17 +181,17 @@ select {
 /* color */
 /* Font-family */
 /* Font-size */
-.card {
+#card {
   margin: 100px auto;
 }
 
-.card .card-nav ul {
+#card .card-nav ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.card .card-nav li {
+#card .card-nav li {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -210,66 +210,66 @@ select {
   transition: all 300ms;
 }
 
-.card .card-nav li.on {
+#card .card-nav li.on {
   -webkit-transform: scale(1.2);
           transform: scale(1.2);
 }
 
-.card .card-nav li:nth-child(1) {
+#card .card-nav li:nth-child(1) {
   background: #2492c0;
 }
 
-.card .card-nav li:nth-child(2) {
+#card .card-nav li:nth-child(2) {
   background: #a90067;
 }
 
-.card .card-nav li:nth-child(3) {
+#card .card-nav li:nth-child(3) {
   background: #008576;
 }
 
-.card .card-nav li:nth-child(4) {
+#card .card-nav li:nth-child(4) {
   background: #e75d17;
 }
 
-.card .card-contents {
+#card .card-contents {
   font-size: 0;
 }
 
-.card .card-contents .card-item {
+#card .card-contents .card-item {
   display: inline-block;
   width: 600px;
   padding: 50px 25px;
   font-size: 0;
 }
 
-.card .card-contents .card-item > div {
+#card .card-contents .card-item > div {
   display: inline-block;
   width: 50%;
   font-size: 14px;
   vertical-align: top;
 }
 
-.card .card-contents .card-item .card-img {
+#card .card-contents .card-item .card-img {
   text-align: center;
 }
 
-.card .card-contents .card-item .card-img img {
+#card .card-contents .card-item .card-img img {
   width: 50%;
   border-radius: 50%;
 }
 
-.card .card-contents .card-item .card-text h3 {
+#card .card-contents .card-item .card-text h3 {
   margin-bottom: 10px;
   font-size: 22px;
 }
 
-.card .card-contents .card-item .card-text li {
+#card .card-contents .card-item .card-text li {
   position: relative;
   padding-left: 15px;
   margin-bottom: 5px;
 }
 
-.card .card-contents .card-item .card-text li::before {
+#card .card-contents .card-item .card-text li::before {
   content: '';
   position: absolute;
   top: 5px;
@@ -279,16 +279,16 @@ select {
   background: #000;
 }
 
-.card .card-btns button {
+#card .card-btns button {
   position: absolute;
   top: 50%;
   z-index: 1;
 }
 
-.card .card-btns button.btn-prev {
+#card .card-btns button.btn-prev {
   left: 0;
 }
 
-.card .card-btns button.btn-next {
+#card .card-btns button.btn-next {
   right: 0;
 }
