@@ -3,8 +3,8 @@ class NavUI {
         this.properties = properties;
     }
     render() {
-        const navLI = this.properties.reduce((acc,cur)=>{
-            return acc += `<li>${cur}</li>`;
+        const navLI = this.properties.reduce((acc,cur,i)=>{
+            return acc += `<li data-item='${i}'>${cur}</li>`;
         },'');
         return `<div class="card-nav"><ul>${navLI}</ul></div>`;
     }

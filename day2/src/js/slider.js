@@ -26,10 +26,6 @@ class Slider {
             'px';
         this.contentsEl.style.transform =
             'translateX(' + -this.itemEl.offsetWidth * this.VIEW + 'px)';
-
-        for (let i = 0; i < this.navLiEl.length; i++) {
-            this.navLiEl[i].dataset.item = [i];
-        }
     }
     cloneEl() {
         const count = this.VIEW;
@@ -47,6 +43,7 @@ class Slider {
     onMove() {
         this.contentsEl.style.transform = `translateX(-${this.itemEl
             .offsetWidth * this.CURRUNT_INDEX}px)`;
+        this.onNavIndex();
     }
     onNextClick() {
         this.nextEl.addEventListener('click', () => {
@@ -91,6 +88,7 @@ class Slider {
     }
     onNavIndex() {
         console.log('NAV INDEX => ', this.CURRUNT_INDEX);
+        console.log(this.navLiEl[this.CURRUNT_INDEX - 1])
     }
     run() {
         this.initStyle();
