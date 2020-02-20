@@ -1,17 +1,22 @@
-const http = require('http');
-const fs = require('fs');
-const app = http.createServer((request,response)=>{
-    let url = request.url;
-    if(request.url == '/'){
-        url = '/index.html';
-    }
-    if(request.url == '/favicon.ico'){
-        response.writeHead(404);
-        response.end();
-        return;
-    }
-    response.writeHead(200);
-    console.log(__dirname + url);
-    response.end(fs.readFileSync(__dirname + url));
+const express = require('express');
+const app = express();
+const fetch = require('node-fetch');
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
+app.set('views', `${__dirname}/views`);
+app.set('view engine', 'hbs');
+
+const apiServer = 'http://localhost:8081';
+
+app.get('/', (req, res) => {
+    res.render('index', {
+        subject: 'index'
+    });
+    fetch(apiServer)
+        .then(res => res.text())
+        .then(body => console.log(body));
 });
-app.listen(8000);
+
+app.listen(8080);
