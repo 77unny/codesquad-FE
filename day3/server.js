@@ -8,7 +8,7 @@ app.use(express.static('public'));
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'hbs');
 
-const apiServer = 'http://localhost:8081';
+const apiServer = 'http://localhost:8081/';
 
 app.get('/', (req, res) => {
     res.render('index', {
@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
     });
     fetch(apiServer)
         .then(res => res.text())
-        .then(body => console.log(body));
+        .then(body => console.log(JSON.parse(body).title));
 });
 
 app.listen(8080);
