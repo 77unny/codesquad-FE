@@ -18,9 +18,9 @@ app.get('/', (req, res) => {
                 title: '아마존 Card UI 구현',
                 subject: '아마존 card ui 구현하기 - node express ',
                 cardNav: JSON.parse(body).navData,
-                cardContents: JSON.parse(body).contentsData
+                cardContents: JSON.parse(body).contentsData,
+                cardBtns: JSON.parse(body).btns
             });
-            console.log(JSON.parse(body).contentsData)
         });
     });
 

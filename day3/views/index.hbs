@@ -31,6 +31,15 @@
             </div>
             {{/each}}
         </div>
+        <div class="card-btns">
+            {{#each cardBtns}}
+                {{#if @first}}
+                <button class="btn-prev">{{this}}</button>
+                {{else}}
+                <button class="btn-next">{{this}}</button>
+                {{/if}}
+            {{/each}}
+        </div>
     </div>
 </body>
 </html>
