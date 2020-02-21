@@ -1,12 +1,13 @@
 const express = require('express');
 const app = express();
 const fetch = require('node-fetch');
+const dataJSON = require('./data/data.json')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const dataJSON = {title:'hello world'}
 app.get('/', (req, res) => {
-    res.json(dataJSON);
+    res.send(dataJSON);
 });
+
 app.listen(8081);

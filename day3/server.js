@@ -9,14 +9,15 @@ app.set('views', `${__dirname}/views`);
 app.set('view engine', 'hbs');
 
 const apiServer = 'http://localhost:8081/';
+const apiData = fetch(apiServer)
+        .then(res => res.text())
+        .then(body => JSON.parse(body));
 
 app.get('/', (req, res) => {
     res.render('index', {
         subject: 'index'
     });
-    fetch(apiServer)
-        .then(res => res.text())
-        .then(body => console.log(JSON.parse(body).title));
+    
 });
 
 app.listen(8080);
