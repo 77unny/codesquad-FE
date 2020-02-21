@@ -3,10 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <h1>{{subject}}</h1>
-    <div>{{jdata}}</div>
+    <div id="card">
+        <div class="card-nav">
+            <ul>
+                {{#each cardNav}}
+                <li data-item='{{@index}}'>{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="card-contents">
+            {{#each cardContents}}
+            <div class="card-item">
+                <div class="card-img"><img src="{{this.img}}"></div>
+                <div class="card-text">
+                    <h3>{{this.title}}</h3>
+                    <ul>
+                        {{#each this.list}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
 </body>
 </html>

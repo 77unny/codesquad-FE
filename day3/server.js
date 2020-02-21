@@ -9,15 +9,19 @@ app.set('views', `${__dirname}/views`);
 app.set('view engine', 'hbs');
 
 const apiServer = 'http://localhost:8081/';
-const apiData = fetch(apiServer)
-        .then(res => res.text())
-        .then(body => JSON.parse(body));
 
 app.get('/', (req, res) => {
-    res.render('index', {
-        subject: 'index'
+    fetch(apiServer)
+        .then(res => res.text())
+        .then(body => {
+            res.render('index', {
+                title: '아마존 Card UI 구현',
+                subject: '아마존 card ui 구현하기 - node express ',
+                cardNav: JSON.parse(body).navData,
+                cardContents: JSON.parse(body).contentsData
+            });
+            console.log(JSON.parse(body).contentsData)
+        });
     });
-    
-});
 
 app.listen(8080);
