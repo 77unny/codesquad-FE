@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
     fetch(apiServer)
         .then(res => res.text())
         .then(body => {
-            res.render('index', {
+            res.render('app', {
                 title: '아마존 Card UI 구현',
                 subject: '아마존 card ui 구현하기 - node express ',
                 cardNav: JSON.parse(body).navData,
@@ -23,5 +23,8 @@ app.get('/', (req, res) => {
             });
         });
 }); 
+app.get('/app', (req,res)=>{
+    res.render('index')
+})
 
 app.listen(8080);

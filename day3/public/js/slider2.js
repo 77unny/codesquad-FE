@@ -99,4 +99,14 @@ class Slider {
         this.onPrevClick();
     }
 }
-export default Slider;
+const slider = new Slider({
+    wrapEl: '#card',
+    navEl: '.card-nav',
+    contentsEl: '.card-contents',
+    itemsEl: '.card-item',
+    itemEl: '.card-item',
+    prevEl: '.btn-prev',
+    nextEl: '.btn-next',
+    speed: 500,
+    view: 1
+});
