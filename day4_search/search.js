@@ -1,7 +1,19 @@
-const word = ['apple', 'hello', 'world', 'appstore'];
 const $$ = target => document.querySelector(target);
 const search = $$('#search');
 const searchInput = $$('#search input');
+
+const localStorageSetItem = () => {
+    const keywordDATA = localStorage.getItem('keywordDATA');
+    if (!keywordDATA) {
+        const apiServer = 'http://localhost:8081/keyword';
+        fetch(apiServer)
+            .then(res => res.text())
+            .then(body => {
+                localStorage.setItem('keywordDATA', body);
+            });
+    }
+    return JSON.parse(keywordDATA).keyword;
+};
 
 const searchList = (el, arr) => {
     const createEl = document.createElement('div');
@@ -30,4 +42,4 @@ const searchList = (el, arr) => {
     };
     el.addEventListener('input', inputValue);
 };
-searchList(searchInput, word);
+searchList(searchInput, localStorageSetItem());
