@@ -5,6 +5,6 @@ const tag = '[Controller]';
 export default {
     init() {
         console.log(tag, 'init');
-        View.setup($('.search'));
+        View.setup($('.search')).on('dd')
     }
 };
