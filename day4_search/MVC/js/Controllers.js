@@ -1,11 +1,13 @@
 import { $, $$ } from './Util.js';
 import View from './View.js';
+import ResultView from './ResultView.js';
 import Model from './Model.js';
 const tag = '[Controller]';
 
 export default {
     init() {
-        console.log(tag);
+        Model.setup();
+        ResultView.setup($('.search'));
         View.setup($('.search'))
             .on('@input', e => this.onInput(e.detail.input))
             .on('@keyDown', e => this.onKeyDown())
@@ -21,6 +23,17 @@ export default {
         console.log('keyup');
     },
     onSearch(input) {
-        Model.find(input);
+        Model.find().then(data => {
+            const words = [];
+            data.forEach(word => {
+                if (word.slice(0, input.length) === input) {
+                    words.push(word);
+                }
+            });
+            this.onSearchResult(words);
+        });
+    },
+    onSearchResult(data) {
+        ResultView.render(data);
     }
 };
