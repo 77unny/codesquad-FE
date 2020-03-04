@@ -1,12 +1,15 @@
 import { $, $$ } from './Util.js';
+import Model from './Model.js';
 import View from './View.js';
 import ResultView from './ResultView.js';
-import Model from './Model.js';
+
 const tag = '[Controller]';
+const JSON_DATA_URL =
+    'https://baekcode.github.io/codesquad-FE/day4_search/keyword.json';
 
 export default {
     init() {
-        Model.setup();
+        Model.setup(JSON_DATA_URL);
         ResultView.setup($('.search'));
         View.setup($('.search'))
             .on('@input', e => this.onInput(e.detail.input))
@@ -14,7 +17,11 @@ export default {
             .on('@keyUp', e => this.onKeyUp());
     },
     onInput(input) {
-        this.onSearch(input);
+        const resultList = [];
+        Model.getData().forEach(v => {
+            if (v.slice(0, input.length) === input) resultList.push(v);
+        });
+        return ResultView.render(resultList);
     },
     onKeyDown() {
         console.log('keydown');

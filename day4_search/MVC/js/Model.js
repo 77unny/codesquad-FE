@@ -1,22 +1,21 @@
-const JSON_URL =
-    'https://baekcode.github.io/codesquad-FE/day4_search/keyword.json';
+const tag = '[Model]';
 
 export default {
-    setup() {
-        this.getData();
+    setup(jsonDataUrl) {
+        if (!this.getLocalStorageData) {
+            this.onFetch(jsonDataUrl);
+        }
+        this.getLocalStorageData = localStorage.getItem('keyword_json');
         return this;
     },
-    getData() {
-        fetch(JSON_URL)
+    onFetch(url) {
+        fetch(url)
             .then(res => res.text())
-            .then((data) => {
-                localStorage.setItem('keyword', data);
-            })
+            .then(data => {
+                localStorage.setItem('keyword_json', data);
+            });
     },
-    find(input){
-        const dataParse = JSON.parse(localStorage.getItem('keyword')).keyword;
-        return new Promise((res,req)=>{
-            res(dataParse)
-        })
+    getData() {
+        return JSON.parse(this.getLocalStorageData).keyword;
     }
 };

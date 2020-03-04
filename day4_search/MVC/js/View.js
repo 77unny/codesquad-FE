@@ -1,8 +1,7 @@
 export default {
     setup(el) {
         this.el = el;
-        this.inputElement = el.querySelector('input');
-        this.bindEvent();
+        this.onEvents();
         return this;
     },
     on(event, handler) {
@@ -10,16 +9,16 @@ export default {
         return this;
     },
     emit(event, data) {
-        const evt = new CustomEvent(event, { detail: data });
-        this.el.dispatchEvent(evt);
+        const customEvent = new CustomEvent(event, { detail: data });
+        this.el.dispatchEvent(customEvent);
         return this;
     },
-    bindEvent() {
-        this.inputElement.addEventListener('input', e => {
+    onEvents() {
+        this.el.addEventListener('input', e => {
             const value = e.target.value;
             this.emit('@input', { input: value });
         });
-        this.inputElement.addEventListener('keydown', e => {
+        this.el.addEventListener('keydown', e => {
             const arrowDownKeyCode = 40;
             const arrowUpKeyCode = 38;
             if (e.keyCode === arrowDownKeyCode) this.emit('@keyDown');

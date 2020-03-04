@@ -1,11 +1,20 @@
 export default {
     setup(el) {
         this.el = el;
-        this.resultElement = document.createElement('div');
-        this.resultElement.classList.add('result')
-        document.querySelector('.search').appendChild(this.resultElement);
+        this.createEl = document.createElement('div');
+        this.createEl.classList.add('keyword-list');
+        el.appendChild(this.createEl);
+        return this;
     },
-    render() {
-        console.log(this.resultElement);
+    render(list) {
+        const result = list.reduce((acc, cur) => {
+            return (acc += `<div>${cur}</div>`);
+        }, '');
+        this.createEl.classList.add('open');
+        return (this.createEl.innerHTML = result);
+    },
+    reset() {
+        this.createEl.innerHTML = '';
+        return this.createEl.classList.remove('open');
     }
 };
