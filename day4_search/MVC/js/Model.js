@@ -16,6 +16,6 @@ export default {
             });
     },
     getData() {
-        return JSON.parse(this.getLocalStorageData).keyword;
+        return JSON.parse(localStorage.getItem('keyword_json')).keyword;
     }
 };
